@@ -35,6 +35,7 @@ public class Jeopardy implements ActionListener {
 
 	public static void main(String[] args) {
 		new Jeopardy().start();
+		
 	}
 
 	private void start() {
@@ -44,6 +45,8 @@ public class Jeopardy implements ActionListener {
 		frame.setLayout(new BorderLayout());
 
 		// 1. Make the frame show up
+		JFrame.getFrames();
+		
 
 		// 2. Give your frame a title
 
