@@ -52,7 +52,7 @@ public class Jeopardy implements ActionListener {
 		// 2. Give your frame a title
 		frame.setTitle("Computers");
 		
-		JPanel q= createHeader("U.S. states ");
+		JPanel q= createHeader("Fun-Friday");
 		
 		// 3. Create a JPanel variable to hold the header using the createHeader method
 		
@@ -63,23 +63,30 @@ public class Jeopardy implements ActionListener {
 		// 5. Add the quizPanel to the frame
 			frame.add(quizPanel);
 		// 6. Use the createButton method to set the value of firstButton	
-			firstButton=createButton("1");
+			firstButton=createButton("50");
 		// 7. Add the firstButton to the quizPanel
-			quizPanel.add(firstButton, "California");
+			quizPanel.add(firstButton);
 
 		// 8. Write the code to complete the createButton() method below. Check that your
 		// game looks like Figure 1 in the Jeopardy Handout - http://bit.ly/1bvnvd4.
 			
 		// 9. Use the secondButton variable to hold a button using the createButton
 		// method
-			secondButton=createButton("Arizona");
+			secondButton=createButton("100");
 		// 10. Add the secondButton to the quizPanel
 			quizPanel.add(secondButton);
 		// 11. Add action listeners to the buttons (2 lines of code)
 			firstButton.addActionListener(this);
 			secondButton.addActionListener(this);
 		// 12. Write the code to complete the actionPerformed() method below
+			thirdButton= createButton("200");
+			quizPanel.add(thirdButton);
 			
+	        fourthButton=createButton("300");
+	        quizPanel.add(fourthButton);
+	        
+	        thirdButton.addActionListener(this);
+	        fourthButton.addActionListener(this);
 
 		// 13. Add buttons so that you have $200, $400, $600, $800 and $1000 questions
 			
@@ -123,8 +130,8 @@ public class Jeopardy implements ActionListener {
 		// If the buttonPressed was the firstButton
 		if(buttonPressed.equals(firstButton)) {
 			
-			askQuestion("what state is at the top left side of the US?", "Washington", 2);
-			
+			askQuestion("what state is next to California?", "Arizona", 50);
+			firstButton.setText(null);
 		
 
 			// Call the askQuestion() method
@@ -133,15 +140,24 @@ public class Jeopardy implements ActionListener {
 		}
 		// If the buttonPressed was the secondButton
 			if(buttonPressed.equals(secondButton)) {
-				askQuestion("what state is next to California?", "Arizona", 2);
-				
+				askQuestion("whats healthier to eat/drink, an apple or a fruit smoothie?","apple", 100);
+					secondButton.setText(null);
+			}
+			if(buttonPressed.equals(thirdButton)) {
+				askQuestion("what is 9 times 5?", "45",200);
+				thirdButton.setText(null);
+			}
+			if(buttonPressed.equals(fourthButton)) {
+				askQuestion("when did world war one ended?", "1920", 300);
+				fourthButton.setText(null);
 			}
 			// Call the askQuestion() method with a harder question
 
 		// Clear the text on the button that was pressed (set the button text to nothing)
-		secondButton.setText(null);
-		firstButton.setText(null);
+	
 
+		
+		
 	}
 
 	private void askQuestion(String question, String correctAnswer, int prizeMoney) {
@@ -150,7 +166,7 @@ public class Jeopardy implements ActionListener {
 		playJeopardyTheme();
 		// Remove this temporary message and replace it with a pop-up that asks the user the question
 		String a=JOptionPane.showInputDialog(question);
-		
+		a=a.trim();
 		// Stop the theme music when they have entered their response. Hint: use the sound variable 
 	 sound.stop();
 		
@@ -161,21 +177,25 @@ public class Jeopardy implements ActionListener {
 	 
 
 			// Increase the score by the prizeMoney
-		 prizeMoney++;
+		 score += prizeMoney;
+		 
 			// Pop up a message to tell the user they were correct
 		 JOptionPane.showInputDialog("correct!");
 	 }
-		// Otherwise
+	
 	 else {
 
 			// Decrement the score by the prizeMoney
-		 prizeMoney--;
+		 score-=prizeMoney;
 
 			// Pop up a message to tell the user they were wrong and give them the correct answer
 		 JOptionPane.showInputDialog("wrong");
 		// Call the updateScore() method
-updateScore();
+
+
+
 	 }
+	 updateScore();
 	}
 
 	public void playJeopardyTheme() {
