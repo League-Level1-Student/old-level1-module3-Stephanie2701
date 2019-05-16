@@ -23,6 +23,7 @@ public class SimonSays extends KeyAdapter {
 	// Complete steps 1 - 7 before you test
 	// 1. Declare a JFrame variable
 	JFrame frame= new JFrame();
+	int score=0;
 	
 	
 	HashMap<Integer, String> images = new HashMap<Integer, String>();
@@ -41,39 +42,61 @@ public class SimonSays extends KeyAdapter {
 
 		// 3. Use a JOptionPane to tell the user the rules: "Press the matching key when
 		// 'Simon says' otherwise press a different key"
-		
-		JOptionPane.showInputDialog("Press the matching key when'Simon says' otherwise press a different key");
+		JOptionPane.showMessageDialog(null, "Press the matching key when'Simon says' otherwise press a different key");
 		// 4. Call the showImage method to show an image
 		
 		showImage();
+		
 	}
 
 	public void keyPressed(KeyEvent e) {
 		// 15. Make a points variable to track the score.
 		
-		// 16. If the keyCode matches the imageIndex and "Simon says"
 		
+		// 16. If the keyCode matches the imageIndex and "Simon says"
+		if(e.getKeyCode()==imageIndex && simonSays) {
 			// 17. Increase the value of score
+			score++;
 		
 			// 18. Use the speak method to tell the user they were correct
+			speak("correct");
+			
+		}
 		
 		// 19. If the keyCode doesn't match the imageIndex and "Simon didn't say..."
+		else if(e.getKeyCode() != imageIndex && simonSays==false) {
 		
 			// 20.  Increase the value of score
+			score++;
 		
 			// 21. Use the speak method to tell the user they were correct
+			speak("correct");
+		}
+		else {
+			speak("incorrect");
+		}
 		
 		// 22. Increment tries by 1
-		
+		tries++;
 		// 25. If tries is greater than 9 (or however many you want)...
+		if(tries>9) {
 		
 			// 26. Tell the user their score
-		
+			System.out.println(score);
+	
 			// 27. Exit the program
+			
+			System.exit(0);
+		}
+	
 
 		// 23. Dispose of the frame
-
+		frame.dispose();
+		
 		// 24. Call the showImage method to show a new image
+		
+		
+		showImage();
 	}
 
 	private void showImage() {
@@ -102,13 +125,23 @@ public class SimonSays extends KeyAdapter {
 		// "Simon says press this key" or "Press this key"
 		int simon= r.nextInt(2);
 		if(simon==0) {
-			speak("whale");
+			speak("Simonn says press this key");
+			simonSays=true;
+			
 		}
+			else {
+				speak("press this key");
+				simonSays=false;
+				
+			}
+			
+		}
+		
 
 		// 14. Above, set the value of simonSays to true/false appropriately
 
 		
-	}
+	
 
 	private Component getNextRandomImage() {
 		this.imageIndex = new Random().nextInt(4) + 37;
